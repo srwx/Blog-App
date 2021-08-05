@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom"
 import "./navbar.css"
 
 export default function Navbar() {
@@ -11,7 +12,9 @@ export default function Navbar() {
       </div>
       <div className="nav-center">
         <ul className="menu-list">
-          <li className="menu-item">HOME</li>
+          <NavLink to="/" className="link" activeClassName="link-active">
+            <li className="menu-item">HOME</li>
+          </NavLink>
           <li className="menu-item">ABOUT</li>
           <li className="menu-item">WRITE</li>
           <li className="menu-item">CONTACT</li>
