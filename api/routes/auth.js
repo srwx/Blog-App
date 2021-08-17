@@ -1,6 +1,12 @@
 const router = require("express").Router()
 const User = require("../models/User")
 
+// LOGIN
+router.post("/login", (req, res) => {
+  const { username, password } = req.body // รับและ destructuring ข้อมูลที่ส่งมาทาง body
+  console.log(`${username} ${password}`)
+})
+
 // Register
 router.post("/register", (req, res) => {
   try {

@@ -1,9 +1,11 @@
+// Components
+import Navbar from "../../components/Navbar"
 import PostContent from "../../components/PostContent"
-import "./singlePost.css"
 
 export default function SinglePost() {
   return (
     <div>
+      <Navbar />
       <PostContent />
     </div>
   )
