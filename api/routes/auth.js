@@ -1,17 +1,44 @@
+const bcrypt = require("bcrypt")
 const router = require("express").Router()
 const User = require("../models/User")
 
 // LOGIN
-router.post("/login", (req, res) => {
-  const { username, password } = req.body // รับและ destructuring ข้อมูลที่ส่งมาทาง body
-  console.log(`${username} ${password}`)
+router.post("/login", async (req, res) => {
+  try {
+    const { username, password } = req.body // รับและ destructuring ข้อมูลที่ส่งมาทาง body
+    const user = await User.findOne({ username })
+
+    // x && y : จะ return y เมื่อ x เป็น truly
+    !user &&
+      res.status(403).json({ message: "Username or password incorrect." }) // ถ้า query ข้อมูลแล้วไม่เจอ user ให้ return status 403
+
+    const checkPassword = await bcrypt.compare(password, user.password)
+    !checkPassword &&
+      res.status(403).json({ message: "Username or password incorrect." })
+
+    const { _id, profilePic, ...others } = user // filter user-object (เอาแค่ _id, profilePic นอกนั้นไม่เอา)
+    res.json({ _id, username, profilePic })
+  } catch (err) {
+    console.log(err)
+  }
 })
 
-// Register
-router.post("/register", (req, res) => {
+// REGISTER
+router.post("/register", async (req, res) => {
   try {
-    const newUser = req.body
-    User.create(newUser) // ไม่ต้องดัก err เพราะถ้าเกิด err โปรแกรมจะเด้งเข้า catch อยู่แล้ว
+    const { username, password, email } = req.body
+
+    // generated salt and hashed password
+    const salt = await bcrypt.genSalt(10)
+    const hashedPassword = await bcrypt.hash(password, salt)
+
+    const newUser = {
+      username,
+      password: hashedPassword,
+      email,
+    }
+    User.create(newUser) // เพิ่ม newUser ลงใน User collection
+    res.json({ message: "Register success" })
   } catch (err) {
     console.log(err)
   }

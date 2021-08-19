@@ -5,6 +5,7 @@ const dotenv = require("dotenv").config() // ทำให้ไฟล์นี�
 
 // Router
 const authRouter = require("./routes/auth")
+const userRouter = require("./routes/user")
 
 // ------------------------------------------------------------------------------------------------------------
 
@@ -26,5 +27,6 @@ app.use(express.json()) // แปลงข้อมูลที่ request ส�
 
 // Call routes in api folder
 app.use("/api/auth", authRouter)
+app.use("/api/user", userRouter)
 
 app.listen(PORT, () => console.log(`server start at port ${PORT}...`))
