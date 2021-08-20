@@ -8,7 +8,8 @@ import LoginBox from "../LoginBox"
 
 export default function Navbar() {
   const { loginBoxOpen, loginClick, loginSubmit } = useLoginBox()
-  const { registerBoxOpen, registerClick, registerSubmit } = useRegisterBox()
+  const { registerBoxOpen, registerClick, registerSubmit, registerResponse } =
+    useRegisterBox()
   return (
     <div className="navbar-container">
       <div className="nav-left">
@@ -52,6 +53,7 @@ export default function Navbar() {
         <RegisterBox
           closeClick={registerClick}
           registerSubmit={registerSubmit}
+          registerResponse={registerResponse}
         />
       ) : null}
     </div>

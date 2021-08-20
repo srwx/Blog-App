@@ -1,6 +1,10 @@
 import "./registerBox.css"
 
-export default function RegisterBox({ closeClick, registerSubmit }) {
+export default function RegisterBox({
+  closeClick,
+  registerSubmit,
+  registerResponse,
+}) {
   return (
     <div className="popupContainer">
       <div className="popupRegisterBox">
@@ -32,6 +36,7 @@ export default function RegisterBox({ closeClick, registerSubmit }) {
               REGISTER
             </button>
           </form>
+          {registerResponse ? registerResponse.message : null}
         </div>
       </div>
     </div>

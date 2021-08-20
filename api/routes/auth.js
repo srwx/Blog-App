@@ -26,7 +26,7 @@ router.post("/login", async (req, res) => {
 // REGISTER
 router.post("/register", async (req, res) => {
   try {
-    const { username, password, email } = req.body
+    const { username, password, email } = req.body // destructuring ข้อมูลที่ส่งมาจาก form
 
     // generated salt and hashed password
     const salt = await bcrypt.genSalt(10)
@@ -37,10 +37,13 @@ router.post("/register", async (req, res) => {
       password: hashedPassword,
       email,
     }
-    User.create(newUser) // เพิ่ม newUser ลงใน User collection
-    res.json({ message: "Register success" })
+    await User.create(newUser) // เพิ่ม newUser ลงใน User collection
+    res.json({
+      message:
+        "Register success, Now you can close this popup and go to login.",
+    })
   } catch (err) {
-    console.log(err)
+    res.status(409).json("This username already exists.")
   }
 })
 
