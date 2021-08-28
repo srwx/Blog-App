@@ -11,6 +11,14 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    firstname: {
+      type: String,
+      required: true,
+    },
+    lastname: {
+      type: String,
+      required: true,
+    },
     email: {
       type: String,
       required: true,
@@ -18,7 +26,7 @@ const UserSchema = new mongoose.Schema(
     },
     profilePic: {
       type: String,
-      default: "",
+      default: "/defaultUserPic.png",
     },
   },
   { timestamps: true }

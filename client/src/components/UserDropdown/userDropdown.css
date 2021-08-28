@@ -1,0 +1,9 @@
+.userDropdown-container {
+  position: absolute;
+  top: 75px;
+  right: 50px;
+  width: 350px;
+  height: 400px;
+  background-color: #fdfbfb;
+  border-radius: 10px;
+}

@@ -14,6 +14,20 @@ export default function RegisterBox({
         <div className="registerContainer">
           <span className="registerTitle">REGISTER</span>
           <form className="inputContainer" onSubmit={(e) => registerSubmit(e)}>
+            <div className="fName-lNameContainer">
+              <input
+                type="text"
+                className="firstnameRegister"
+                placeholder="Firstname"
+                name="firstname"
+              />
+              <input
+                type="text"
+                className="lastnameRegister"
+                placeholder="Lastname"
+                name="lastname"
+              />
+            </div>
             <input
               type="text"
               className="usernameRegister"
@@ -36,7 +50,7 @@ export default function RegisterBox({
               REGISTER
             </button>
           </form>
-          {registerResponse ? registerResponse.message : null}
+          {registerResponse ? <span>{registerResponse.message}</span> : null}
         </div>
       </div>
     </div>

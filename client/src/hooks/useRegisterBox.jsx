@@ -17,10 +17,14 @@ export default function usePopupBox() {
       event.preventDefault()
       const username = event.target.username.value
       const password = event.target.password.value
+      const firstname = event.target.firstname.value
+      const lastname = event.target.lastname.value
       const email = event.target.email.value
       const axiosRes = await axios.post("/auth/register", {
         username,
         password,
+        firstname,
+        lastname,
         email,
       }) // ส่ง object {username, password, email} ผ่าน HTTP request body และรอรับ response (รับ response เก็บไว้ในตัวแปร axiosRes)
       const resData = {

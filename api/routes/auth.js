@@ -21,8 +21,8 @@ router.post("/login", async (req, res) => {
         .status(403)
         .json({ message: "Username or password incorrect." })
 
-    const { _id, profilePic, ...others } = user // filter user-object (เอาแค่ _id, profilePic นอกนั้นไม่เอา)
-    res.json({ _id, username, profilePic })
+    const { _id, profilePic, firstname, lastname, ...others } = user // filter user-object (เอาแค่ _id, profilePic นอกนั้นไม่เอา)
+    res.json({ _id, username, firstname, lastname, profilePic })
   } catch (err) {
     console.log(err)
   }
@@ -31,7 +31,7 @@ router.post("/login", async (req, res) => {
 // REGISTER
 router.post("/register", async (req, res) => {
   try {
-    const { username, password, email } = req.body // destructuring ข้อมูลที่ส่งมาจาก form
+    const { username, password, firstname, lastname, email } = req.body // destructuring ข้อมูลที่ส่งมาจาก form
 
     // generated salt and hashed password
     const salt = await bcrypt.genSalt(10)
@@ -40,6 +40,8 @@ router.post("/register", async (req, res) => {
     const newUser = {
       username,
       password: hashedPassword,
+      firstname,
+      lastname,
       email,
     }
     await User.create(newUser) // เพิ่ม newUser ลงใน User collection

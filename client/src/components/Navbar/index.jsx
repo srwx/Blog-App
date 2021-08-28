@@ -6,14 +6,17 @@ import { UserContext } from "../../context/Context"
 // Custom hooks
 import useLoginBox from "../../hooks/useLoginBox"
 import useRegisterBox from "../../hooks/useRegisterBox"
+import useDropdown from "../../hooks/useDropdown"
 // Components
 import RegisterBox from "../RegisterBox"
 import LoginBox from "../LoginBox"
+import UserDropdown from "../UserDropdown"
 
 export default function Navbar() {
   const { loginBoxOpen, loginClick, loginSubmit, loginResult } = useLoginBox()
   const { registerBoxOpen, registerClick, registerSubmit, registerResponse } =
     useRegisterBox()
+  const { dropdownOpen, userIconClick } = useDropdown()
   const { user } = useContext(UserContext)
 
   return (
@@ -32,18 +35,19 @@ export default function Navbar() {
           <li className="menu-item">ABOUT</li>
           <li className="menu-item">WRITE</li>
           <li className="menu-item">CONTACT</li>
-          <li className="menu-item">LOG OUT</li>
+          {user ? <li className="menu-item">LOG OUT</li> : null}
         </ul>
       </div>
       <div className="nav-right">
         {user ? (
           <>
+            <i className="search-icon fas fa-search" />
             <img
-              src="https://scontent.fbkk28-1.fna.fbcdn.net/v/t1.6435-9/117958973_2756111237821896_2814351278256452421_n.jpg?_nc_cat=108&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=4ytmLuafv64AX-gMiJG&_nc_ht=scontent.fbkk28-1.fna&oh=1cddba0e203295ac22ae5fefd3b169be&oe=612D6AD8"
+              src={user.profilePic}
               alt="profile"
               className="profile-img"
+              onClick={userIconClick}
             />
-            <i className="search-icon fas fa-search" />
           </>
         ) : (
           <ul className="menu-list">
@@ -70,6 +74,7 @@ export default function Navbar() {
           registerResponse={registerResponse}
         />
       ) : null}
+      {dropdownOpen ? <UserDropdown /> : null}
     </div>
   )
 }
