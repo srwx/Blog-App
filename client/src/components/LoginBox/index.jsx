@@ -1,7 +1,7 @@
 // style
 import "./loginBox.css"
 
-export default function LoginBox({ closeClick, loginSubmit }) {
+export default function LoginBox({ closeClick, loginSubmit, loginResult }) {
   return (
     <div className="popupContainer">
       <div className="popupBox">
@@ -27,6 +27,7 @@ export default function LoginBox({ closeClick, loginSubmit }) {
               LOGIN
             </button>
           </form>
+          {loginResult ? loginResult : null}
         </div>
       </div>
     </div>

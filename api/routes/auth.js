@@ -8,13 +8,18 @@ router.post("/login", async (req, res) => {
     const { username, password } = req.body // รับและ destructuring ข้อมูลที่ส่งมาทาง body
     const user = await User.findOne({ username })
 
-    // x && y : จะ return y เมื่อ x เป็น truly
-    !user &&
-      res.status(403).json({ message: "Username or password incorrect." }) // ถ้า query ข้อมูลแล้วไม่เจอ user ให้ return status 403
+    // ไม่เจอ username นี้ใน database
+    if (!user)
+      return res
+        .status(403)
+        .json({ message: "Username or password incorrect." })
 
     const checkPassword = await bcrypt.compare(password, user.password)
-    !checkPassword &&
-      res.status(403).json({ message: "Username or password incorrect." })
+    // เจอ username นี้ แต่กรอก password ผิด
+    if (!checkPassword)
+      return res
+        .status(403)
+        .json({ message: "Username or password incorrect." })
 
     const { _id, profilePic, ...others } = user // filter user-object (เอาแค่ _id, profilePic นอกนั้นไม่เอา)
     res.json({ _id, username, profilePic })
