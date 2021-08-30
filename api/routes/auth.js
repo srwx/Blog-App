@@ -21,7 +21,7 @@ router.post("/login", async (req, res) => {
         .status(403)
         .json({ message: "Username or password incorrect." })
 
-    const { _id, profilePic, firstname, lastname, ...others } = user // filter user-object (เอาแค่ _id, profilePic นอกนั้นไม่เอา)
+    const { _id, profilePic, firstname, lastname, ...others } = user
     res.json({ _id, username, firstname, lastname, profilePic })
   } catch (err) {
     console.log(err)

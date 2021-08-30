@@ -22,10 +22,8 @@ export default function Navbar() {
   return (
     <div className="navbar-container">
       <div className="nav-left">
-        <i className="social-icon fab fa-facebook-square" />
-        <i className="social-icon fab fa-twitter-square" />
-        <i className="social-icon fab fa-line" />
-        <i className="social-icon fab fa-instagram-square" />
+        <input type="text" className="search-input" />
+        <i className="search-icon fas fa-search" />
       </div>
       <div className="nav-center">
         <ul className="menu-list">
@@ -35,20 +33,16 @@ export default function Navbar() {
           <li className="menu-item">ABOUT</li>
           <li className="menu-item">WRITE</li>
           <li className="menu-item">CONTACT</li>
-          {user ? <li className="menu-item">LOG OUT</li> : null}
         </ul>
       </div>
       <div className="nav-right">
         {user ? (
-          <>
-            <i className="search-icon fas fa-search" />
-            <img
-              src={user.profilePic}
-              alt="profile"
-              className="profile-img"
-              onClick={userIconClick}
-            />
-          </>
+          <img
+            src={user.profilePic}
+            alt="profile"
+            className="profile-img"
+            onClick={userIconClick}
+          />
         ) : (
           <ul className="menu-list">
             <li className="menu-item" onClick={loginClick}>

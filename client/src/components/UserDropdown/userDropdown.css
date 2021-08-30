@@ -1,9 +1,21 @@
+.link {
+  text-decoration: none;
+}
+
 .userDropdown-container {
   position: absolute;
-  top: 75px;
-  right: 50px;
-  width: 350px;
-  height: 400px;
+  top: 65px;
+  right: 13px;
+  width: 345px;
+  height: 290px;
   background-color: #fdfbfb;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.line-userdropdown {
+  width: 100%;
+  margin: 4px 0;
 }
